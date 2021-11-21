@@ -26,4 +26,9 @@ public class PlaneTest {
     public void hasWeight(){
         assertEquals(20, plane1.getWeightFromType());
     }
+
+    @Test
+    public void totalWeightAllowedForLuggage() {
+        assertEquals(10, plane1.totalWeightAllowedForLuggage());
+    }
 }

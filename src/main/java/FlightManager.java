@@ -14,11 +14,23 @@ public class FlightManager {
     }
 
     public int baggageWeightPerPassenger() {
-        return ((plane.getWeightFromType() / 2) / plane.getCapacityFromType());
+        return ((plane.totalWeightAllowedForLuggage() / plane.getCapacityFromType()));
     }
 
-    public int totalWeightofLuggageOfPassengers(Flight flight) {
-        return this.baggageWeightPerPassenger() * flight.passengerSize();
+
+
+    public double totalWeightOfLuggageForPassengers(ArrayList<Passenger> passengers) {
+        double weightPerCaseOfLuggage = 0.5;
+        int totalBags = 0;
+
+        for (Passenger passenger: passengers) {
+            totalBags += passenger.getNumberOfBags() ;
+        }
+        return (totalBags * weightPerCaseOfLuggage);
     }
 
+
+    public double weightRemainingForLuggage(Plane plane, ArrayList<Passenger> passengers) {
+        return plane.totalWeightAllowedForLuggage() - totalWeightOfLuggageForPassengers(passengers);
+    }
 }

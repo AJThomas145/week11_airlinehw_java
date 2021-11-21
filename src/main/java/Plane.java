@@ -20,4 +20,7 @@ public class Plane {
     }
 
 
+    public int totalWeightAllowedForLuggage() {
+        return this.getWeightFromType() / 2;
+    }
 }

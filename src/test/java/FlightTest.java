@@ -26,7 +26,7 @@ public class FlightTest {
         pilot1 = new Pilot("Steven", RankType.CAPTAIN, "N11223344");
         flight = new Flight(flightManager, pilot1, plane1, "EDI", "ED1122", "EDI", "1800" );
         passenger1 = new Passenger("Andy", 1);
-        passenger2 = new Passenger("David", 1);
+        passenger2 = new Passenger("David", 2);
         passenger3 = new Passenger("Graeme", 1);
         passenger4 = new Passenger("Helen", 1);
         cabinCrewMember1 = new CabinCrewMember("John", RankType.FIRSTOFFICER);
@@ -94,13 +94,25 @@ public class FlightTest {
 
     @Test
     public void totalWeightOfLuggage() {
-        flight.addPassengerToFlight(passenger1);
-        flight.addPassengerToFlight(passenger2);
-        flight.addPassengerToFlight(passenger3);
-        assertEquals(3, flightManager.totalWeightofLuggageOfPassengers(flight));
+        ArrayList<Passenger> passengers = new ArrayList<>();
+        passengers.add(passenger1);
+        passengers.add(passenger2);
+        passengers.add(passenger3);
+        assertEquals(2, flightManager.totalWeightOfLuggageForPassengers(passengers), 0.01);
+    }
+
+    @Test
+    public void weightRemainingForLuggage() {
+        ArrayList<Passenger> passengers = new ArrayList<>();
+        passengers.add(passenger1);
+        passengers.add(passenger2);
+        passengers.add(passenger3);
+        assertEquals(8, flightManager.weightRemainingForLuggage(plane1, passengers), 0.01);
     }
 
 
 
-
 }
+
+
+
