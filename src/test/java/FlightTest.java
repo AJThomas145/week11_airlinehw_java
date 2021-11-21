@@ -7,6 +7,7 @@ import static org.junit.Assert.assertEquals;
 
 public class FlightTest {
 
+    FlightManager flightManager;
     Flight flight;
     Pilot pilot1;
     Plane plane1;
@@ -21,12 +22,13 @@ public class FlightTest {
     @Before
     public void setUp(){
         plane1 = new Plane(PlaneType.BOEING737);
+        flightManager = new FlightManager(plane1);
         pilot1 = new Pilot("Steven", RankType.CAPTAIN, "N11223344");
-        flight = new Flight(pilot1, plane1, "EDI", "ED1122", "EDI", "1800" );
+        flight = new Flight(flightManager, pilot1, plane1, "EDI", "ED1122", "EDI", "1800" );
         passenger1 = new Passenger("Andy", 1);
         passenger2 = new Passenger("David", 1);
-        passenger3 = new Passenger("Graeme", 2);
-        passenger4 = new Passenger("Helen", 2);
+        passenger3 = new Passenger("Graeme", 1);
+        passenger4 = new Passenger("Helen", 1);
         cabinCrewMember1 = new CabinCrewMember("John", RankType.FIRSTOFFICER);
         cabinCrewMember2 = new CabinCrewMember("Susan", RankType.ATTENDANT);
         cabinCrewMember3 = new CabinCrewMember("Steven", RankType.ATTENDANT);
@@ -83,6 +85,19 @@ public class FlightTest {
     public void crewWelcomeMessagetoPassengers(){
         flight.addCabinCrewToFLight(cabinCrewMember1);
         assertEquals("Hello passengers, welcome aboard your flight", cabinCrewMember1.welcomePassengerMessage());
+    }
+
+    @Test
+    public void baggageWeightPerPassengerPerTonnes(){
+        assertEquals(1, flightManager.baggageWeightPerPassenger());
+    }
+
+    @Test
+    public void totalWeightOfLuggage() {
+        flight.addPassengerToFlight(passenger1);
+        flight.addPassengerToFlight(passenger2);
+        flight.addPassengerToFlight(passenger3);
+        assertEquals(3, flightManager.totalWeightofLuggageOfPassengers(flight));
     }
 
 

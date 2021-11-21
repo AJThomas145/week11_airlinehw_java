@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class Flight {
 
+    private FlightManager flightManager;
     private Pilot pilot;
     private Plane plane;
     private ArrayList<CabinCrewMember> cabinCrewMembers;
@@ -11,7 +12,8 @@ public class Flight {
     private String airport;
     private String departureTime;
 
-    public Flight (Pilot pilot, Plane plane, String flightNumber, String destination, String airport, String departureTime ) {
+    public Flight (FlightManager flightManager, Pilot pilot, Plane plane, String flightNumber, String destination, String airport, String departureTime ) {
+        this.flightManager = flightManager;
         this.pilot = pilot;
         this.plane = plane;
         this.cabinCrewMembers = new ArrayList<>();
