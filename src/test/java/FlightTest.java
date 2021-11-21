@@ -13,6 +13,7 @@ public class FlightTest {
     Passenger passenger1;
     Passenger passenger2;
     Passenger passenger3;
+    Passenger passenger4;
     CabinCrewMember cabinCrewMember1;
     CabinCrewMember cabinCrewMember2;
     CabinCrewMember cabinCrewMember3;
@@ -22,6 +23,13 @@ public class FlightTest {
         plane1 = new Plane(PlaneType.BOEING737);
         pilot1 = new Pilot("Steven", RankType.CAPTAIN, "N11223344");
         flight = new Flight(pilot1, plane1, "EDI", "ED1122", "EDI", "1800" );
+        passenger1 = new Passenger("Andy", 1);
+        passenger2 = new Passenger("David", 1);
+        passenger3 = new Passenger("Graeme", 2);
+        passenger4 = new Passenger("Helen", 2);
+        cabinCrewMember1 = new CabinCrewMember("John", RankType.FIRSTOFFICER);
+        cabinCrewMember2 = new CabinCrewMember("Susan", RankType.ATTENDANT);
+        cabinCrewMember3 = new CabinCrewMember("Steven", RankType.ATTENDANT);
 
     }
 
@@ -32,7 +40,14 @@ public class FlightTest {
     }
 
     @Test
-    public void addPassengerToFlight() {
+    public void showAvailableSeats(){
+        flight.addPassengerToFlight(passenger1);
+        flight.addPassengerToFlight(passenger2);
+        assertEquals(8, flight.availableSeats());
+    }
+
+    @Test
+    public void bookPassengerToFlight() {
         flight.addPassengerToFlight(passenger1);
         flight.addPassengerToFlight(passenger2);
         flight.addPassengerToFlight(passenger3);
@@ -40,16 +55,35 @@ public class FlightTest {
     }
 
     @Test
-    public void showAvailableSeats(){
+    public void flightFullCantAddPassenger() {
         flight.addPassengerToFlight(passenger1);
         flight.addPassengerToFlight(passenger2);
-        assertEquals(8, flight.availableSeats());
+        flight.addPassengerToFlight(passenger3);
+        flight.addPassengerToFlight(passenger1);
+        flight.addPassengerToFlight(passenger2);
+        flight.addPassengerToFlight(passenger3);
+        flight.addPassengerToFlight(passenger1);
+        flight.addPassengerToFlight(passenger2);
+        flight.addPassengerToFlight(passenger3);
+        flight.addPassengerToFlight(passenger3);
+        flight.addPassengerToFlight(passenger4);
+        assertEquals(10, flight.passengerSize());
+
     }
 
-//    @Test
-//    public void crewWelcomeMessagetoPassengers(){
-//        flight.wel
-//    }
+    @Test
+    public void addCabinCrewToFlight(){
+        flight.addCabinCrewToFLight(cabinCrewMember1);
+        flight.addCabinCrewToFLight(cabinCrewMember2);
+        flight.addCabinCrewToFLight(cabinCrewMember3);
+        assertEquals(3, flight.cabinCrewSize());
+    }
+
+    @Test
+    public void crewWelcomeMessagetoPassengers(){
+        flight.addCabinCrewToFLight(cabinCrewMember1);
+        assertEquals("Hello passengers, welcome aboard your flight", cabinCrewMember1.welcomePassengerMessage());
+    }
 
 
 

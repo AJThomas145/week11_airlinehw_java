@@ -28,17 +28,25 @@ public class Flight {
         return pilot.getName();
     }
 
-    public int passengerSize () {
+    public int passengerSize() {
         return this.passengers.size();
-    }
-
-    public void addPassengerToFlight(Passenger passenger) {
-        if (this.passengerSize() < this.plane.getCapacityFromType()) {
-            this.passengers.add(passenger);
-        }
     }
 
     public int availableSeats() {
         return plane.getCapacityFromType() - passengers.size();
     }
+
+    public void addPassengerToFlight(Passenger passenger) {
+        if (this.passengerSize() < this.plane.getCapacityFromType()) {
+            this.passengers.add(passenger);}
+    }
+
+    public int cabinCrewSize() {
+        return this.cabinCrewMembers.size();
+    }
+
+    public void addCabinCrewToFLight(CabinCrewMember cabinCrewMember) {
+        this.cabinCrewMembers.add(cabinCrewMember);
+    }
+
 }
