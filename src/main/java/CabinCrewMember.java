@@ -15,4 +15,8 @@ public class CabinCrewMember {
     public RankType getRank() {
         return rank;
     }
+
+    public String welcomePassengerMessage() {
+        return "Hello passengers, welcome aboard your flight";
+    }
 }

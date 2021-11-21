@@ -11,7 +11,7 @@ public class Flight {
     private String airport;
     private String departureTime;
 
-    public Flight(Pilot pilot, Plane plane, String flightNumber, String destination, String airport, String departureTime ) {
+    public Flight (Pilot pilot, Plane plane, String flightNumber, String destination, String airport, String departureTime ) {
         this.pilot = pilot;
         this.plane = plane;
         this.cabinCrewMembers = new ArrayList<>();
@@ -23,35 +23,22 @@ public class Flight {
 
     }
 
-    public Pilot getPilot() {
-        return pilot;
+
+    public String showPilotFlyingPlane() {
+        return pilot.getName();
     }
 
-    public Plane getPlane() {
-        return plane;
+    public int passengerSize () {
+        return this.passengers.size();
     }
 
-    public ArrayList<CabinCrewMember> getCabinCrewMembers() {
-        return cabinCrewMembers;
+    public void addPassengerToFlight(Passenger passenger) {
+        if (this.passengerSize() < this.plane.getCapacityFromType()) {
+            this.passengers.add(passenger);
+        }
     }
 
-    public ArrayList<Passenger> getPassengers() {
-        return passengers;
-    }
-
-    public String getFlightNumber() {
-        return flightNumber;
-    }
-
-    public String getDestination() {
-        return destination;
-    }
-
-    public String getAirport() {
-        return airport;
-    }
-
-    public String getDepartureTime() {
-        return departureTime;
+    public int availableSeats() {
+        return plane.getCapacityFromType() - passengers.size();
     }
 }
